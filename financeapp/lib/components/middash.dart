@@ -9,6 +9,7 @@ class MidDash extends StatefulWidget {
 
 class _MidDash extends State<MidDash> {
   bool isButtonActive = false;
+  String optdate = "Week";
 
   @override
   Widget build(BuildContext context) {
@@ -63,21 +64,88 @@ class _MidDash extends State<MidDash> {
         Dates(),
         Container(
           margin: EdgeInsets.only(top: 10),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(onPressed: () {}, child: Text("Day")),
-                ElevatedButton(onPressed: () {}, child: Text("Week")),
-                ElevatedButton(onPressed: () {}, child: Text("Month")),
-                ElevatedButton(onPressed: () {}, child: Text("Year")),
-                ElevatedButton(onPressed: () {}, child: Text("Period")),
-              ],
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 58,
+                height: 30,
+                // padding: EdgeInsets.all(5),
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      optdate = "Today";
+                    });
+                  },
+                  child: Text("Day", style: TextStyle(fontSize: 10)),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(100, 43, 45, 48)),
+                ),
+              ),
+              Container(
+                width: 58,
+                height: 30,
+                // padding: EdgeInsets.all(5),
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      optdate = "This Week";
+                    });
+                  },
+                  child: Text("Week", style: TextStyle(fontSize: 10)),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(100, 43, 45, 48)),
+                ),
+              ),
+              Container(
+                width: 58,
+                height: 30,
+                // padding: EdgeInsets.all(5),
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      optdate = "This Month";
+                    });
+                  },
+                  child: Text("Month", style: TextStyle(fontSize: 10)),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(100, 43, 45, 48)),
+                ),
+              ),
+              Container(
+                width: 58,
+                height: 30,
+                // padding: EdgeInsets.all(5),
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      optdate = "This Year";
+                    });
+                  },
+                  child: Text("Year", style: TextStyle(fontSize: 10)),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(100, 43, 45, 48)),
+                ),
+              ),
+              Container(
+                width: 58,
+                height: 30,
+                // padding: EdgeInsets.all(5),
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      optdate = "This Period";
+                    });
+                  },
+                  child: Text("Period", style: TextStyle(fontSize: 9)),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(100, 43, 45, 48)),
+                ),
+              ),
+            ],
           ),
         ),
-        Container(height: 200, child: PieCharting()),
+        Container(height: 200, child: PieCharting(optdate: optdate)),
       ],
     );
   }

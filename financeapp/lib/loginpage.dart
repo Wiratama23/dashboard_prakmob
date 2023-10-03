@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 import 'dashboard.dart';
 
@@ -43,11 +44,7 @@ class LoginPage extends StatelessWidget {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Dashboard()),
-                          );
+                          Get.to(Dashboard());
                         },
                         child: Text("LOG IN", style: TextStyle(fontSize: 14)),
                         style: ElevatedButton.styleFrom(

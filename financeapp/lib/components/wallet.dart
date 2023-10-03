@@ -11,7 +11,7 @@ class Wallet extends StatelessWidget {
         height: 120,
         margin: EdgeInsets.all(10),
         child: Card(
-          color: Colors.yellow[100],
+          color: Color.fromARGB(255, 181, 221, 218),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: Column(
@@ -35,16 +35,21 @@ class Wallet extends StatelessWidget {
                 ],
               ),
               Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 10),
-                    Text("BALANCE", style: TextStyle(fontSize: 17)),
-                    Text("Rp. $balances",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold))
-                  ],
+                child: Container(
+                  color: Color.fromARGB(255, 235, 231, 137),
+                  padding:
+                      EdgeInsets.only(top: 11, left: 30, right: 30, bottom: 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // SizedBox(height: 10),
+                      Text("BALANCE", style: TextStyle(fontSize: 17)),
+                      Text("Rp. $balances",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold))
+                    ],
+                  ),
                 ),
               )
             ],

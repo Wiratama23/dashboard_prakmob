@@ -60,14 +60,17 @@ class _DashboardState extends State<Dashboard> {
           ],
         ),
       ),
-      bottomNavigationBar: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.home)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.calendar_month)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.person)),
-        ],
+      bottomNavigationBar: Container(
+        color: Color.fromARGB(255, 181, 221, 218),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.home)),
+            IconButton(onPressed: () {}, icon: Icon(Icons.calendar_month)),
+            IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
+            IconButton(onPressed: () {}, icon: Icon(Icons.person)),
+          ],
+        ),
       ),
     );
   }
