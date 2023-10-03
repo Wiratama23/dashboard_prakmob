@@ -3,10 +3,10 @@ import 'package:intl/intl.dart';
 
 class Dates extends StatefulWidget {
   @override
-  _PieChartState createState() => _PieChartState();
+  _Dates createState() => _Dates();
 }
 
-class _PieChartState extends State<Dates> {
+class _Dates extends State<Dates> {
   DateTime currentDate = DateTime.now();
   bool dateend = true;
 
