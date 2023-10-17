@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Wallet extends StatelessWidget {
-  var balances;
+  final int balances;
 
   Wallet({required this.balances});
 

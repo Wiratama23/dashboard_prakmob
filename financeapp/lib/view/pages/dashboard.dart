@@ -1,10 +1,10 @@
-import 'dart:convert';
-
-import 'package:financeapp/components/wallet.dart';
+import 'package:financeapp/view/widget/middash.dart';
+import 'package:financeapp/view/widget/profile.dart';
+import 'package:financeapp/view/widget/wallet.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
-import 'components/middash.dart';
+import '../../models/readjson.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -12,50 +12,30 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  List _user = [];
-  String username = "";
-  static var balances = 0;
   var abc = DateTime.now();
-
-  //fetch data from json
-  Future<void> readJson() async {
-    print(abc);
-    final String response = await rootBundle.loadString('lib/assets/data.json');
-    final data = await json.decode(response);
-    setState(() {
-      _user = data["user"];
-      username = _user.isNotEmpty ? _user[0]["name"] : "";
-      balances = _user.isNotEmpty ? _user[0]["balances"] : 0;
-    });
-  }
+  final DataController dataController = DataController();
 
   @override
   void initState() {
     super.initState();
-    readJson();
+    dataController.readJson();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hello $username"),
+        title: Obx(() => Text("Hello ${dataController.username.value}")),
         backgroundColor: Color(0xFF171814),
         elevation: 0,
-        leading: Container(
-          padding: EdgeInsets.all(10),
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(50)),
-            child: Image.asset('lib/images/profile.jpg'),
-          ),
-        ),
+        leading: Container(padding: EdgeInsets.all(10), child: Profile()),
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.menu))],
       ),
       body: Container(
         color: Color(0xFF171814),
         child: Column(
           children: [
-            Wallet(balances: balances),
+            Obx(() => Wallet(balances: dataController.balances.value)),
             MidDash(),
           ],
         ),

@@ -15,7 +15,7 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset('lib/images/Loginpage.png'),
+              Image.asset('lib/assets/images/Loginpage.png'),
               SizedBox(height: 30),
               Container(
                 margin: EdgeInsets.only(left: 20, right: 20),

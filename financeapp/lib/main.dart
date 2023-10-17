@@ -1,7 +1,8 @@
-import 'package:financeapp/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+
+import 'view/pages/loginpage.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

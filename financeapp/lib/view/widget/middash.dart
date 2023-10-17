@@ -1,6 +1,8 @@
-import 'package:financeapp/components/dates.dart';
-import 'package:financeapp/components/piechart.dart';
+import 'package:financeapp/controllers/middash_controller.dart';
+import 'package:financeapp/view/widget/dates.dart';
+import 'package:financeapp/view/widget/piechart.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MidDash extends StatefulWidget {
   @override
@@ -8,8 +10,17 @@ class MidDash extends StatefulWidget {
 }
 
 class _MidDash extends State<MidDash> {
-  bool isButtonActive = false;
-  String optdate = "Week";
+  final MidDashController controller = Get.put(MidDashController());
+
+  ButtonStyle active = ElevatedButton.styleFrom(
+    foregroundColor: Colors.black87,
+    backgroundColor: Color.fromARGB(255, 235, 231, 137),
+  );
+
+  ButtonStyle inactive = ElevatedButton.styleFrom(
+    foregroundColor: Color.fromRGBO(164, 161, 101, 30),
+    backgroundColor: Color.fromARGB(100, 164, 161, 101),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -22,34 +33,23 @@ class _MidDash extends State<MidDash> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        isButtonActive = true;
-                      });
-                    },
-                    child: const Text("Expense"),
-                    style: ElevatedButton.styleFrom(
-                        foregroundColor: isButtonActive
-                            ? Colors.black87
-                            : Color.fromRGBO(164, 161, 101, 30),
-                        backgroundColor: isButtonActive
-                            ? Color.fromARGB(255, 235, 231, 137)
-                            : Color.fromARGB(100, 164, 161, 101))),
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        isButtonActive = false;
-                      });
-                    },
-                    child: const Text("Income"),
-                    style: ElevatedButton.styleFrom(
-                        foregroundColor: isButtonActive
-                            ? Color.fromRGBO(164, 161, 101, 30)
-                            : Colors.black87,
-                        backgroundColor: isButtonActive
-                            ? Color.fromARGB(100, 164, 161, 101)
-                            : Color.fromARGB(255, 235, 231, 137))),
+                Obx(() => ElevatedButton(
+                      onPressed: () {
+                        controller.setExpense();
+                      },
+                      child: const Text("Expense"),
+                      style:
+                          controller.button_num.value == 1 ? active : inactive,
+                    )),
+                Obx(
+                  () => ElevatedButton(
+                      onPressed: () {
+                        controller.setIncome();
+                      },
+                      child: const Text("Income"),
+                      style:
+                          controller.button_num.value == 2 ? active : inactive),
+                ),
               ]),
               IconButton(
                   onPressed: () {},
@@ -61,7 +61,7 @@ class _MidDash extends State<MidDash> {
             ],
           ),
         ),
-        Dates(),
+        DatesView(),
         Container(
           margin: EdgeInsets.only(top: 10),
           child: Row(
@@ -73,9 +73,7 @@ class _MidDash extends State<MidDash> {
                 // padding: EdgeInsets.all(5),
                 child: ElevatedButton(
                   onPressed: () {
-                    setState(() {
-                      optdate = "Today";
-                    });
+                    controller.setOptDate("Today");
                   },
                   child: Text("Day", style: TextStyle(fontSize: 10)),
                   style: ElevatedButton.styleFrom(
@@ -88,9 +86,7 @@ class _MidDash extends State<MidDash> {
                 // padding: EdgeInsets.all(5),
                 child: ElevatedButton(
                   onPressed: () {
-                    setState(() {
-                      optdate = "This Week";
-                    });
+                    controller.setOptDate("This Week");
                   },
                   child: Text("Week", style: TextStyle(fontSize: 10)),
                   style: ElevatedButton.styleFrom(
@@ -103,9 +99,7 @@ class _MidDash extends State<MidDash> {
                 // padding: EdgeInsets.all(5),
                 child: ElevatedButton(
                   onPressed: () {
-                    setState(() {
-                      optdate = "This Month";
-                    });
+                    controller.setOptDate("This Month");
                   },
                   child: Text("Month", style: TextStyle(fontSize: 10)),
                   style: ElevatedButton.styleFrom(
@@ -118,9 +112,7 @@ class _MidDash extends State<MidDash> {
                 // padding: EdgeInsets.all(5),
                 child: ElevatedButton(
                   onPressed: () {
-                    setState(() {
-                      optdate = "This Year";
-                    });
+                    controller.setOptDate("This Year");
                   },
                   child: Text("Year", style: TextStyle(fontSize: 10)),
                   style: ElevatedButton.styleFrom(
@@ -133,9 +125,7 @@ class _MidDash extends State<MidDash> {
                 // padding: EdgeInsets.all(5),
                 child: ElevatedButton(
                   onPressed: () {
-                    setState(() {
-                      optdate = "This Period";
-                    });
+                    controller.setOptDate("This Period");
                   },
                   child: Text("Period", style: TextStyle(fontSize: 9)),
                   style: ElevatedButton.styleFrom(
@@ -145,7 +135,12 @@ class _MidDash extends State<MidDash> {
             ],
           ),
         ),
-        Container(height: 200, child: PieCharting(optdate: optdate)),
+        Container(
+            height: 200,
+            child: Obx(() => PieCharting(
+                  optdate: controller.optdate.value,
+                  pieStatus: controller.pieStatus.value,
+                ))),
       ],
     );
   }
